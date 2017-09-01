@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calendar_dates_layout"
+    android:layout_width="70dp"
+    android:layout_height="@dimen/calender_square_size"
+    android:minWidth="70dp"
+    android:minHeight="40dp"
+    android:background="@color/v2_white">
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:enabled="false"
+        android:gravity="center"
+        android:textColor="@color/v2_grey"
+        android:textSize="@dimen/calendar_header_text_size"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomCalender">
+        <attr name="calendar_title" format="string" />
+        <attr name="isRangeMode" format="boolean" />
+        <attr name="noOfRange" format="integer" />
+    </declare-styleable>
+</resources>
