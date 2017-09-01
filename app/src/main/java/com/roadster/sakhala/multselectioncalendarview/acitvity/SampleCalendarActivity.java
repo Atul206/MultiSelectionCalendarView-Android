@@ -9,6 +9,11 @@ import com.roadster.sakhala.multselectioncalendarview.R;
 import com.roadster.sakhala.multselectioncalendarview.calendarview.MultiSelectionCalendarView;
 import com.roadster.sakhala.multselectioncalendarview.callback.OnDateChangeListener;
 
+
+/**
+ * Sample example for multiselection calendarviewg
+ */
+
 public class SampleCalendarActivity extends AppCompatActivity implements OnDateChangeListener {
     private static  final String TAG = SampleCalendarActivity.class.getSimpleName();
 
