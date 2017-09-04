@@ -2,17 +2,14 @@ package com.roadster.sakhala.multselectioncalendarview.calendarview;
 
 import com.roadster.sakhala.multselectioncalendarview.util.Constant;
 
-import net.danlew.android.joda.JodaTimeAndroid;
-
 import org.joda.time.DateTime;
 
 import java.text.DateFormatSymbols;
 
 /**
  * Created by atulsakhala on 02/09/17.
- *
+ * <p>
  * Created a logic of calendar.
- *
  */
 
 public class CalendarPresenter implements Constant {

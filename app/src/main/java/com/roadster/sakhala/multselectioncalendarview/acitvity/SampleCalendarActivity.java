@@ -1,7 +1,7 @@
 package com.roadster.sakhala.multselectioncalendarview.acitvity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
@@ -9,8 +9,6 @@ import com.roadster.sakhala.multselectioncalendarview.R;
 import com.roadster.sakhala.multselectioncalendarview.calendarview.Event;
 import com.roadster.sakhala.multselectioncalendarview.calendarview.MultiSelectionCalendarView;
 import com.roadster.sakhala.multselectioncalendarview.callback.OnDateChangeListener;
-
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
@@ -20,7 +18,7 @@ import java.util.ArrayList;
  */
 
 public class SampleCalendarActivity extends AppCompatActivity implements OnDateChangeListener {
-    private static  final String TAG = SampleCalendarActivity.class.getSimpleName();
+    private static final String TAG = SampleCalendarActivity.class.getSimpleName();
 
     MultiSelectionCalendarView calendarView;
     ArrayList<Event> events = new ArrayList<>();
@@ -29,11 +27,11 @@ public class SampleCalendarActivity extends AppCompatActivity implements OnDateC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_calendar);
-        calendarView = (MultiSelectionCalendarView)findViewById(R.id.calendar);
+        calendarView = (MultiSelectionCalendarView) findViewById(R.id.calendar);
         init();
     }
 
-    private void init(){
+    private void init() {
         calendarView.populateCalendar();
         calendarView.setOnDateChangeListener(this);
         long event1 = 1505025304000l;

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 /**
  * Created by atulsakhala on 02/09/17.
- *
  */
 
 public class MultiSelectionCalendarView extends RelativeLayout implements CalendarView, CalendarCallback, AdapterCallback {
@@ -213,7 +212,7 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
         calendarDateManager.setEvents(events);
     }
 
-    public ArrayList<Event> setEvents(ArrayList<Event> events){
+    public ArrayList<Event> setEvents(ArrayList<Event> events) {
         return events;
     }
 }

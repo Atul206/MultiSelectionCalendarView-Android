@@ -22,7 +22,7 @@ public class CalendarDateHolder {
     Event event;
 
 
-    public CalendarDateHolder(boolean selected, TextView textView, RelativeLayout relativeLayout, int date, int month, int year, Event event ,Context context) {
+    public CalendarDateHolder(boolean selected, TextView textView, RelativeLayout relativeLayout, int date, int month, int year, Event event, Context context) {
         this.selected = selected;
         this.isFromSelected = isFromSelected;
         this.isToSelected = isToSelected;
@@ -37,12 +37,12 @@ public class CalendarDateHolder {
     }
 
     private void setUp() {
-        if(event == null) {
+        if (event == null) {
             textView.setTextColor(context.getResources().getColor(R.color.v2_white));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 relativeLayout.setBackground(context.getResources().getDrawable(R.drawable.corner_round_rectangle_filled_green));
             }
-        }else{
+        } else {
             textView.setTextColor(context.getResources().getColor(event.getColorId()));
         }
     }

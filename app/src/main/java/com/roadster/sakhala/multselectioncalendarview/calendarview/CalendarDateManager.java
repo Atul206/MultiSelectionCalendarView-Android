@@ -330,10 +330,6 @@ public class CalendarDateManager {
         return this.events;
     }
 
-    private HashMap<String, Event> getEventsMap(){
-        return eventsMap;
-    }
-
     public void setEvents(ArrayList<Event> events) {
         this.events = events;
         for (Event event : events) {
@@ -341,5 +337,9 @@ public class CalendarDateManager {
             String ky = d.getDayOfMonth() + "_" + d.getMonthOfYear() + "_" + d.getYear();
             eventsMap.put(ky, event);
         }
+    }
+
+    private HashMap<String, Event> getEventsMap() {
+        return eventsMap;
     }
 }
