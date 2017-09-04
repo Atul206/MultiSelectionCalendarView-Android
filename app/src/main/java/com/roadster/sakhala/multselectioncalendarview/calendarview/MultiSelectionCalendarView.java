@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,13 +18,17 @@ import com.roadster.sakhala.multselectioncalendarview.callback.AdapterCallback;
 import com.roadster.sakhala.multselectioncalendarview.callback.CalendarCallback;
 import com.roadster.sakhala.multselectioncalendarview.callback.OnDateChangeListener;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import java.util.ArrayList;
+
 /**
  * Created by atulsakhala on 02/09/17.
- *
  */
 
 public class MultiSelectionCalendarView extends RelativeLayout implements CalendarView, CalendarCallback, AdapterCallback {
 
+    private static final String TAG = MultiSelectionCalendarView.class.getSimpleName();
     protected ImageView leftNav;
     protected ImageView rightNav;
     protected TextView selectedDateTitle;
@@ -65,6 +70,7 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
         recyclerView = (RecyclerView) view.findViewById(R.id.dates);
         calendarDateManager = new CalendarDateManager(true, this);
         presenter = new CalendarPresenter(this);
+        JodaTimeAndroid.init(context);
     }
 
 
@@ -171,6 +177,7 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
 
     @Override
     public void setUpRecycleViewMultipleMode(int skipDays, int currentMonth, int currentYear, boolean is31stDayMonth) {
+        Log.d(TAG, "Multiple Selection");
         calendarDateManager.setSelectionMode(2);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 7));
         recyclerView.addItemDecoration(new SpacesItemDecoration());
@@ -180,6 +187,7 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
 
     @Override
     public void setUpRecycleViewSingleMode(int skipDays, int currentMonth, int currentYear, boolean is31stDayMonth) {
+        Log.d(TAG, "Single Selection");
         calendarDateManager.setSelectionMode(1);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 7));
         recyclerView.addItemDecoration(new SpacesItemDecoration());
@@ -198,5 +206,13 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
     @Override
     public void clearAllData() {
         listener.resetCalendar();
+    }
+
+    public void setEvent(ArrayList<Event> events) {
+        calendarDateManager.setEvents(events);
+    }
+
+    public ArrayList<Event> setEvents(ArrayList<Event> events) {
+        return events;
     }
 }

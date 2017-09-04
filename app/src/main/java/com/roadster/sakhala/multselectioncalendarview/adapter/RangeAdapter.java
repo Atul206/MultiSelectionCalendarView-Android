@@ -118,6 +118,8 @@ public class RangeAdapter extends RecyclerView.Adapter<RangeAdapter.DateLayoutVi
     private void checkAndInvalidateSelection(DateLayoutViewHolder holder, int date) {
         if (calendarDateManager.isCalendarLieBetweenRange(date, month, year)) {
             calendarDateManager.rangeDataSelection(activity, true, holder.dateText, holder.dateLayout, date, month, year);
+        } else if (calendarDateManager.isEventPresent(date, month, year)) {
+            calendarDateManager.putEvent(activity, true, holder.dateText, holder.dateLayout, date, month, year);
         }
     }
 

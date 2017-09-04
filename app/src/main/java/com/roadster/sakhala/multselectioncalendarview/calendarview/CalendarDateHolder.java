@@ -19,9 +19,10 @@ public class CalendarDateHolder {
     RelativeLayout relativeLayout;
     int date, month, year;
     Context context;
+    Event event;
 
 
-    public CalendarDateHolder(boolean selected, TextView textView, RelativeLayout relativeLayout, int date, int month, int year, Context context) {
+    public CalendarDateHolder(boolean selected, TextView textView, RelativeLayout relativeLayout, int date, int month, int year, Event event, Context context) {
         this.selected = selected;
         this.isFromSelected = isFromSelected;
         this.isToSelected = isToSelected;
@@ -31,14 +32,19 @@ public class CalendarDateHolder {
         this.month = month;
         this.year = year;
         this.context = context;
+        this.event = event;
         setUp();
     }
 
     private void setUp() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            relativeLayout.setBackground(context.getResources().getDrawable(R.drawable.corner_round_rectangle_filled_green));
+        if (event == null) {
+            textView.setTextColor(context.getResources().getColor(R.color.v2_white));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                relativeLayout.setBackground(context.getResources().getDrawable(R.drawable.corner_round_rectangle_filled_green));
+            }
+        } else {
+            textView.setTextColor(context.getResources().getColor(event.getColorId()));
         }
-        textView.setTextColor(context.getResources().getColor(R.color.v2_white));
     }
 
     public int getDate() {
@@ -122,4 +128,6 @@ public class CalendarDateHolder {
         relativeLayout.setBackgroundColor(context.getResources().getColor(R.color.v2_green));
         textView.setTextColor(context.getResources().getColor(R.color.v2_white));
     }
+
+
 }

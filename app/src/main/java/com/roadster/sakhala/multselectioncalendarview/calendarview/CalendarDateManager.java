@@ -6,6 +6,10 @@ import android.widget.TextView;
 
 import com.roadster.sakhala.multselectioncalendarview.callback.AdapterCallback;
 
+import org.joda.time.DateTime;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,6 +23,7 @@ public class CalendarDateManager {
     private static final int MULTIPLE_SELECTION_MODE = 2;
     private String falseKey = "0_0_0";
     private HashMap<String, CalendarDateHolder> calendarDateHolders = new HashMap<>();
+    private HashMap<String, Event> eventsMap = new HashMap<>();
     private int selectionMode = 2;
     private AdapterCallback adapterAction;
 
@@ -33,6 +38,8 @@ public class CalendarDateManager {
     private int toDate;
     private int toMonth;
     private int toYear;
+
+    private ArrayList<Event> events = new ArrayList<>();
 
     public CalendarDateManager(boolean isRangeEnable, AdapterCallback adapterCallback) {
         this.adapterAction = adapterCallback;
@@ -151,7 +158,7 @@ public class CalendarDateManager {
     private void invalidateAllOnSingleSelection(int date, int month, int year, boolean selected, TextView textView, RelativeLayout relativeLayout, Context context) {
         String key = date + "_" + month + "_" + year;
         getCalendarDateHolders().clear();
-        getCalendarDateHolders().put(key, new CalendarDateHolder(true, textView, relativeLayout, date, month, year, context));
+        getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
         setSingleDate(date);
         setSingleMonth(month);
         setSingleYear(year);
@@ -160,7 +167,7 @@ public class CalendarDateManager {
     private void invalidateAllOnMultipleSelection(int date, int month, int year, boolean selected, TextView textView, RelativeLayout relativeLayout, Context context) {
         String key = date + "_" + month + "_" + year;
         if (getCalendarDateHolders().size() == 0) {
-            getCalendarDateHolders().put(key, new CalendarDateHolder(true, textView, relativeLayout, date, month, year, context));
+            getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
             setFromDate(date);
             setFromMonth(month);
             setFromYear(year);
@@ -174,10 +181,10 @@ public class CalendarDateManager {
                     setToDate(date);
                     setToMonth(month);
                     setToYear(year);
-                    getCalendarDateHolders().put(key, new CalendarDateHolder(true, textView, relativeLayout, date, month, year, context));
+                    getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
                 } else {
                     removeMultipleSelection();
-                    invalidateAllOnMultipleSelection(date, month, year, true, textView, relativeLayout, context);
+                    invalidateAllOnMultipleSelection(date, month, year, selected, textView, relativeLayout, context);
                 }
             }
         } else {
@@ -189,14 +196,14 @@ public class CalendarDateManager {
                     setToDate(date);
                     setToMonth(month);
                     setToYear(year);
-                    getCalendarDateHolders().put(key, new CalendarDateHolder(true, textView, relativeLayout, date, month, year, context));
+                    getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
                 } else {
                     removeMultipleSelection();
-                    invalidateAllOnMultipleSelection(date, month, year, true, textView, relativeLayout, context);
+                    invalidateAllOnMultipleSelection(date, month, year, selected, textView, relativeLayout, context);
                 }
             } else if (getCalendarDateHolders().get(key) == null) {
                 removeMultipleSelection();
-                invalidateAllOnMultipleSelection(date, month, year, true, textView, relativeLayout, context);
+                invalidateAllOnMultipleSelection(date, month, year, selected, textView, relativeLayout, context);
             }
         }
     }
@@ -222,6 +229,14 @@ public class CalendarDateManager {
         }
         getCalendarDateHolders().clear();
         adapterAction.clearAllData();
+    }
+
+    public boolean isEventPresent(int date, int month, int year) {
+        String key = date + "_" + month + "_" + year;
+        if (eventsMap != null)
+            return eventsMap.containsKey(key);
+        else
+            return false;
     }
 
     public boolean isCalendarLieBetweenRange(int date, int month, int year) {
@@ -252,20 +267,28 @@ public class CalendarDateManager {
         return false;
     }
 
-    public void rangeDataSelection(Context activity, boolean b, TextView textView, RelativeLayout relativeLayout, int date, int month, int year) {
+    public void putEvent(Context activity, boolean selected, TextView textView, RelativeLayout relativeLayout, int date, int month, int year) {
+        String key = date + "_" + month + "_" + year;
+
+        Event event = getEventsMap().get(key);
+        textView.setTextColor(activity.getResources().getColor(event.getColorId()));
+    }
+
+    public void rangeDataSelection(Context activity, boolean selected, TextView textView, RelativeLayout relativeLayout, int date, int month, int year) {
         String key = date + "_" + month + "_" + year;
         String fromKey = getFromDate() + "_" + getFromMonth() + "_" + getFromYear();
         String toKey = getToDate() + "_" + getToMonth() + "_" + getToYear();
+
         if ((date >= getFromDate() && date <= getToDate() && month >= getFromMonth() && month <= getToMonth() && year >= getFromYear() && year <= getToYear())) {
-            getCalendarDateHolders().put(key, new CalendarDateHolder(true, textView, relativeLayout, date, month, year, activity));
+            getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
         }
 
         if (key.equals(fromKey)) {
-            getCalendarDateHolders().put(fromKey, new CalendarDateHolder(true, textView, relativeLayout, date, month, year, activity));
+            getCalendarDateHolders().put(fromKey, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
         }
 
         if (key.equals(toKey)) {
-            getCalendarDateHolders().put(toKey, new CalendarDateHolder(true, textView, relativeLayout, date, month, year, activity));
+            getCalendarDateHolders().put(toKey, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
         }
     }
 
@@ -278,9 +301,9 @@ public class CalendarDateManager {
         return false;
     }
 
-    public void lastSingleDateSelected(Context activity, boolean b, TextView dateText, RelativeLayout dateLayout, int date, int month, int year) {
+    public void lastSingleDateSelected(Context activity, boolean selected, TextView dateText, RelativeLayout dateLayout, int date, int month, int year) {
         String key = date + "_" + month + "_" + year;
-        getCalendarDateHolders().put(key, new CalendarDateHolder(true, dateText, dateLayout, date, month, year, activity));
+        getCalendarDateHolders().put(key, new CalendarDateHolder(selected, dateText, dateLayout, date, month, year, null, activity));
     }
 
     public void clearCalendarData() {
@@ -298,5 +321,25 @@ public class CalendarDateManager {
 
     public void setFixedDate(Context activity, boolean b, TextView dateText, RelativeLayout dateLayout, int date, int month, int year) {
 
+    }
+
+    public ArrayList<Event> getEvents() {
+        if (events == null) {
+            return new ArrayList<Event>();
+        }
+        return this.events;
+    }
+
+    public void setEvents(ArrayList<Event> events) {
+        this.events = events;
+        for (Event event : events) {
+            DateTime d = new DateTime(new Date(event.getDate()));
+            String ky = d.getDayOfMonth() + "_" + d.getMonthOfYear() + "_" + d.getYear();
+            eventsMap.put(ky, event);
+        }
+    }
+
+    private HashMap<String, Event> getEventsMap() {
+        return eventsMap;
     }
 }

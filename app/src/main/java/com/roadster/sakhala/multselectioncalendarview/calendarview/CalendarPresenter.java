@@ -8,9 +8,8 @@ import java.text.DateFormatSymbols;
 
 /**
  * Created by atulsakhala on 02/09/17.
- *
+ * <p>
  * Created a logic of calendar.
- *
  */
 
 public class CalendarPresenter implements Constant {
