@@ -118,6 +118,7 @@ public class RangeAdapter extends RecyclerView.Adapter<RangeAdapter.DateLayoutVi
     private void checkAndInvalidateSelection(DateLayoutViewHolder holder, int date) {
         if (calendarDateManager.isCalendarLieBetweenRange(date, month, year)) {
             calendarDateManager.rangeDataSelection(activity, true, holder.dateText, holder.dateLayout, date, month, year);
+            calendarCallback.setSelected(true);
         } else if (calendarDateManager.isEventPresent(date, month, year)) {
             calendarDateManager.putEvent(activity, true, holder.dateText, holder.dateLayout, date, month, year);
         }
@@ -154,6 +155,7 @@ public class RangeAdapter extends RecyclerView.Adapter<RangeAdapter.DateLayoutVi
         this.year = currentYear;
         this.is31stDayMonth = is31stDayMonth;
         this.count = 1;
+        calendarCallback.setSelected(false);
         notifyDataSetChanged();
     }
 

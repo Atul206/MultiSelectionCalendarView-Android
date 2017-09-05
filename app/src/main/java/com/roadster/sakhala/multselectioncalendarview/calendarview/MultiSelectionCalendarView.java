@@ -215,4 +215,11 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
     public ArrayList<Event> setEvents(ArrayList<Event> events) {
         return events;
     }
+
+    @Override
+    public void setSelected(boolean selected) {
+        if(selected){
+            listener.getDateIsSelected(selected);
+        }
+    }
 }
