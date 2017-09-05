@@ -8,11 +8,15 @@ import com.roadster.sakhala.multselectioncalendarview.callback.AdapterCallback;
 
 import org.joda.time.DateTime;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Created by atulsakhala on 01/09/17.
@@ -38,6 +42,9 @@ public class CalendarDateManager {
     private int toDate;
     private int toMonth;
     private int toYear;
+
+    private Long minDate;
+    private Long maxDate;
 
     private ArrayList<Event> events = new ArrayList<>();
 
@@ -151,6 +158,46 @@ public class CalendarDateManager {
         }
     }
 
+    public Date getMinDate() {
+        if(this.minDate == null){
+            return null;
+        }
+        return new Date(this.minDate);
+    }
+
+    public void setMinDate(int date, int month, int year) {
+        if(date == 0 || month == 0 || year == 0){
+            this.minDate = null;
+        }
+        String minDateStr = month + "/" + date + "/" + year;
+        try {
+            this.minDate = parseDate(minDateStr);
+        } catch (ParseException e) {
+            this.minDate = null;
+            e.printStackTrace();
+        }
+    }
+
+    public Date getMaxDate() {
+        if(this.maxDate == null){
+            return null;
+        }
+        return new Date(this.maxDate);
+    }
+
+    public void setMaxDate(int date, int month, int year) {
+        if(date == 0 || month == 0 || year == 0){
+            this.maxDate = null;
+        }
+        String minDateStr = month + "/" + date + "/" + year;
+        try {
+            this.maxDate = parseDate(minDateStr);
+        } catch (ParseException e) {
+            this.maxDate = null;
+            e.printStackTrace();
+        }
+    }
+
     private void checkItemSelection(int date, int month, int year) {
 
     }
@@ -171,7 +218,7 @@ public class CalendarDateManager {
             setFromDate(date);
             setFromMonth(month);
             setFromYear(year);
-
+            setMinDate(date,month,year);
         } else if (getCalendarDateHolders().size() == 1) {
             if (getCalendarDateHolders().get(key) != null && getCalendarDateHolders().get(key).isSelected()) {
                 removeMultipleSelection();
@@ -181,6 +228,7 @@ public class CalendarDateManager {
                     setToDate(date);
                     setToMonth(month);
                     setToYear(year);
+                    setMaxDate(date,month,year);
                     getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
                 } else {
                     removeMultipleSelection();
@@ -196,6 +244,7 @@ public class CalendarDateManager {
                     setToDate(date);
                     setToMonth(month);
                     setToYear(year);
+                    setMaxDate(date,month,year);
                     getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
                 } else {
                     removeMultipleSelection();
@@ -219,6 +268,8 @@ public class CalendarDateManager {
         setToDate(0);
         setToMonth(0);
         setToYear(0);
+        setMinDate(0,0,0);
+        setMaxDate(0,0,0);
 
         Iterator it = getCalendarDateHolders().entrySet().iterator();
         while (it.hasNext()) {
@@ -244,26 +295,32 @@ public class CalendarDateManager {
         String fromKey = getFromDate() + "_" + getFromMonth() + "_" + getFromYear();
         String toKey = getToDate() + "_" + getToMonth() + "_" + getToYear();
 
-        if ((date >= getFromDate() && date <= getToDate() && month >= getFromMonth() && month <= getToMonth() && year >= getFromYear() && year <= getToYear())) {
-            return true;
-        }
+        String dateStr = month+"/"+date+"/"+year;
+        try {
+            Date selectedDate = new Date(parseDate(dateStr));
+            if (getMinDate() != null && getMaxDate() != null && selectedDate.after(getMinDate()) && selectedDate.before(getMaxDate())) {
+                return true;
+            }
 
-        if (getCalendarDateHolders().get(key) == null) {
-            return false;
-        }
+            if (getCalendarDateHolders().get(key) == null) {
+                return false;
+            }
 
-        if (fromKey.equals(falseKey)) {
-            return false;
-        } else if (fromKey.equals(key)) {
-            return true;
-        }
+            if (fromKey.equals(falseKey)) {
+                return false;
+            } else if (fromKey.equals(key)) {
+                return true;
+            }
 
-        if (toKey.equals(falseKey)) {
-            return false;
-        } else if (toKey.equals(key)) {
-            return true;
-        }
+            if (toKey.equals(falseKey)) {
+                return false;
+            } else if (toKey.equals(key)) {
+                return true;
+            }
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
@@ -279,16 +336,22 @@ public class CalendarDateManager {
         String fromKey = getFromDate() + "_" + getFromMonth() + "_" + getFromYear();
         String toKey = getToDate() + "_" + getToMonth() + "_" + getToYear();
 
-        if ((date >= getFromDate() && date <= getToDate() && month >= getFromMonth() && month <= getToMonth() && year >= getFromYear() && year <= getToYear())) {
-            getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
-        }
+        String dateStr = month+"/"+date+"/"+year;
+        try {
+            Date selectedDate = new Date(parseDate(dateStr));
+            if (getMinDate() != null && getMaxDate() != null && selectedDate.after(getMinDate()) && selectedDate.before(getMaxDate())) {
+                getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
+            }
 
-        if (key.equals(fromKey)) {
-            getCalendarDateHolders().put(fromKey, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
-        }
+            if (key.equals(fromKey)) {
+                getCalendarDateHolders().put(fromKey, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
+            }
 
-        if (key.equals(toKey)) {
-            getCalendarDateHolders().put(toKey, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
+            if (key.equals(toKey)) {
+                getCalendarDateHolders().put(toKey, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
+            }
+        }catch (ParseException e){
+            e.printStackTrace();
         }
     }
 
@@ -341,5 +404,13 @@ public class CalendarDateManager {
 
     private HashMap<String, Event> getEventsMap() {
         return eventsMap;
+    }
+
+    public long parseDate(String text)
+            throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy",
+                Locale.US);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+05:30"));
+        return dateFormat.parse(text).getTime();
     }
 }
