@@ -33,7 +33,7 @@ Add it in your root build.gradle at the end of repositories:
 <br/>
 Step 2. Add the dependency
 <pre>dependencies {
-        compile 'com.github.Atul206:MultiSelectionCalendarView-Android:1.0.4'
+        compile 'com.github.Atul206:MultiSelectionCalendarView-Android:1.0.9'
 }</pre>
 
 Step 3. Add MultiCalendarView in you layout
