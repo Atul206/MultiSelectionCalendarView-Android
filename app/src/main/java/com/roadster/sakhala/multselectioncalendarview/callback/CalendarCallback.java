@@ -5,7 +5,6 @@ package com.roadster.sakhala.multselectioncalendarview.callback;
  */
 
 public interface CalendarCallback {
-    void setDateMonthYear(int date, int month, int year);
+    void setDateMonthYear(int date, int month, int year, boolean isActive);
 
-    void setSelected(boolean b);
 }

@@ -117,8 +117,8 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
     }
 
     @Override
-    public void setDateMonthYear(int date, int month, int year) {
-        listener.onDateChange(view, date, month, year);
+    public void setDateMonthYear(int date, int month, int year, boolean isActive) {
+        listener.onDateChange(view, date, month, year,isActive);
     }
 
     @Override
@@ -216,10 +216,4 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
         return events;
     }
 
-    @Override
-    public void setSelected(boolean selected) {
-        if(selected){
-            listener.getDateIsSelected(selected);
-        }
-    }
 }

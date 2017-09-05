@@ -7,9 +7,7 @@ import android.view.View;
  */
 
 public interface OnDateChangeListener {
-    void onDateChange(View view, int date, int month, int year);
+    void onDateChange(View view, int date, int month, int year, boolean isActive);
 
     void resetCalendar();
-
-    void getDateIsSelected(boolean selected);
 }

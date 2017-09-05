@@ -71,7 +71,7 @@ public class NonRangeAdapter extends RecyclerView.Adapter<NonRangeAdapter.DateLa
                         public void onClick(View view) {
                             int date = Integer.valueOf(holder.dateText.getText().toString());
                             calendarDateManager.onDateSelected(activity, true, holder.dateText, holder.dateLayout, date, month, year);
-                            calendarCallback.setDateMonthYear(date, month, year);
+                            calendarCallback.setDateMonthYear(date, month, year, calendarDateManager.isActive());
                             count = 1;
                             notifyDataSetChanged();
                         }
@@ -88,7 +88,7 @@ public class NonRangeAdapter extends RecyclerView.Adapter<NonRangeAdapter.DateLa
                         public void onClick(View view) {
                             int date = Integer.valueOf(holder.dateText.getText().toString());
                             calendarDateManager.onDateSelected(activity, true, holder.dateText, holder.dateLayout, date, month, year);
-                            calendarCallback.setDateMonthYear(date, month, year);
+                            calendarCallback.setDateMonthYear(date, month, year, calendarDateManager.isActive());
                             count = 1;
                             notifyDataSetChanged();
                         }
@@ -107,7 +107,6 @@ public class NonRangeAdapter extends RecyclerView.Adapter<NonRangeAdapter.DateLa
     private void checkAndInvalidateSelection(NonRangeAdapter.DateLayoutViewHolder holder, int date) {
         if (calendarDateManager.isDatePresent(date, month, year)) {
             calendarDateManager.lastSingleDateSelected(activity, true, holder.dateText, holder.dateLayout, date, month, year);
-            calendarCallback.setSelected(true);
         }
     }
 
@@ -152,7 +151,6 @@ public class NonRangeAdapter extends RecyclerView.Adapter<NonRangeAdapter.DateLa
         this.year = currentYear;
         this.is31stDayMonth = is31stDayMonth;
         this.count = 1;
-        calendarCallback.setSelected(false);
         notifyDataSetChanged();
     }
 
