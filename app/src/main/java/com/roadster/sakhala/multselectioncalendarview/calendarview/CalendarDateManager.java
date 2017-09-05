@@ -46,6 +46,8 @@ public class CalendarDateManager {
     private Long minDate;
     private Long maxDate;
 
+    private boolean active = true;
+
     private ArrayList<Event> events = new ArrayList<>();
 
     public CalendarDateManager(boolean isRangeEnable, AdapterCallback adapterCallback) {
@@ -145,6 +147,14 @@ public class CalendarDateManager {
         this.singleYear = singleYear;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public void onDateSelected(Context context, boolean selected, TextView textView, RelativeLayout linearLayout
             , int date, int month, int year) {
         switch (selectionMode) {
@@ -212,6 +222,7 @@ public class CalendarDateManager {
     }
 
     private void invalidateAllOnMultipleSelection(int date, int month, int year, boolean selected, TextView textView, RelativeLayout relativeLayout, Context context) {
+        setActive(true);
         String key = date + "_" + month + "_" + year;
         if (getCalendarDateHolders().size() == 0) {
             getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
@@ -222,6 +233,7 @@ public class CalendarDateManager {
         } else if (getCalendarDateHolders().size() == 1) {
             if (getCalendarDateHolders().get(key) != null && getCalendarDateHolders().get(key).isSelected()) {
                 removeMultipleSelection();
+                setActive(false);
             } else {
                 String fromKey = getFromDate() + "_" + getFromMonth() + "_" + getFromYear();
                 if (date > getFromDate() || month > getFromMonth() || year > getFromYear()) {
@@ -239,6 +251,7 @@ public class CalendarDateManager {
             String fromKey = getFromDate() + "_" + getFromMonth() + "_" + getFromYear();
             if (key.equals(fromKey)) {
                 removeMultipleSelection();
+                setActive(false);
             } else if (getCalendarDateHolders().get(key) != null && getCalendarDateHolders().get(key).isSelected()) {
                 if (date > getFromDate() || month > getFromMonth() || year > getFromYear()) {
                     setToDate(date);

@@ -44,8 +44,8 @@ public class SampleCalendarActivity extends AppCompatActivity implements OnDateC
     }
 
     @Override
-    public void onDateChange(View view, int date, int month, int year) {
-        Log.d(TAG, date + " " + month + " " + year);
+    public void onDateChange(View view, int date, int month, int year, boolean isActive) {
+        Log.d(TAG, date + " " + month + " " + year + " " + isActive);
     }
 
 
@@ -53,4 +53,5 @@ public class SampleCalendarActivity extends AppCompatActivity implements OnDateC
     public void resetCalendar() {
         calendarView.invalidateSelection();
     }
+
 }
