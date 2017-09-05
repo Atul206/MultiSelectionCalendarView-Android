@@ -392,6 +392,8 @@ public class CalendarDateManager {
         setSingleDate(0);
         setSingleMonth(0);
         setSingleYear(0);
+        setMinDate(0,0,0);
+        setMaxDate(0,0,0);
         getCalendarDateHolders().clear();
     }
 
