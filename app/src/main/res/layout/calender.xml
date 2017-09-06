@@ -1,13 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/v2_white">
 
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -24,11 +25,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1.5"
-            android:textStyle="bold"
-            android:text="15 August 2017"
             android:gravity="center"
+            android:text="15 August 2017"
+            android:textSize="18sp"
 
-            android:textSize="18sp" />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/right_nav"
@@ -54,8 +55,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="SUN"
-            android:textStyle="bold"
-            android:textSize="@dimen/calendar_header_text_size" />
+            android:textSize="@dimen/calendar_header_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -63,8 +64,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="MON"
-            android:textStyle="bold"
-            android:textSize="@dimen/calendar_header_text_size" />
+            android:textSize="@dimen/calendar_header_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -72,8 +73,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="TUE"
-            android:textStyle="bold"
-            android:textSize="@dimen/calendar_header_text_size" />
+            android:textSize="@dimen/calendar_header_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -81,8 +82,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="WED"
-            android:textStyle="bold"
-            android:textSize="@dimen/calendar_header_text_size" />
+            android:textSize="@dimen/calendar_header_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -90,8 +91,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="THU"
-            android:textStyle="bold"
-            android:textSize="@dimen/calendar_header_text_size" />
+            android:textSize="@dimen/calendar_header_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -99,8 +100,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="FRI"
-            android:textStyle="bold"
-            android:textSize="@dimen/calendar_header_text_size" />
+            android:textSize="@dimen/calendar_header_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -108,19 +109,18 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="SAT"
-            android:textStyle="bold"
-            android:textSize="@dimen/calendar_header_text_size" />
+            android:textSize="@dimen/calendar_header_text_size"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/dates"
-        android:padding="5dp"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/calendar_header" />
+        android:layout_below="@id/calendar_header"
+        android:orientation="horizontal"
+        android:clipToPadding="false"/>
 
 </RelativeLayout>
