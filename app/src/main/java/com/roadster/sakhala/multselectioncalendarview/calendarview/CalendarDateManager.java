@@ -1,6 +1,7 @@
 package com.roadster.sakhala.multselectioncalendarview.calendarview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -341,7 +342,7 @@ public class CalendarDateManager {
         String key = date + "_" + month + "_" + year;
 
         Event event = getEventsMap().get(key);
-        textView.setTextColor(activity.getResources().getColor(event.getColorId()));
+        textView.setTextColor(Color.parseColor(event.getColorId()));
     }
 
     public void rangeDataSelection(Context activity, boolean selected, TextView textView, RelativeLayout relativeLayout, int date, int month, int year) {

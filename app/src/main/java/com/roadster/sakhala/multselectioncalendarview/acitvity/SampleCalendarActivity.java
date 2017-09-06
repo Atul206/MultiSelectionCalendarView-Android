@@ -1,5 +1,6 @@
 package com.roadster.sakhala.multselectioncalendarview.acitvity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,9 +38,9 @@ public class SampleCalendarActivity extends AppCompatActivity implements OnDateC
         long event1 = 1505025304000l;
         long event2 = 1505198104000l;
         long event3 = 1505630104000l;
-        events.add(new Event(event1, R.color.v2_yellow));
-        events.add(new Event(event2, R.color.v2_yellow));
-        events.add(new Event(event3, R.color.v2_green));
+        events.add(new Event(event1, "#19b985"));
+        //events.add(new Event(event2, R.color.v2_yellow));
+        //events.add(new Event(event3, R.color.v2_green));
         calendarView.setEvent(events);
         findViewById(R.id.clear).setOnClickListener(new View.OnClickListener() {
             @Override
