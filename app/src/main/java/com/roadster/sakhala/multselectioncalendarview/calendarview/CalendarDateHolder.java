@@ -3,6 +3,7 @@ package com.roadster.sakhala.multselectioncalendarview.calendarview;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class CalendarDateHolder {
         if (event == null) {
             textView.setTextColor(context.getResources().getColor(R.color.v2_white));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                relativeLayout.setBackground(context.getResources().getDrawable(R.drawable.corner_round_rectangle_filled_green));
+                relativeLayout.setBackgroundColor(context.getResources().getColor(R.color.v2_green));
             }
         } else {
             textView.setTextColor(Color.parseColor(event.getColorId()));
@@ -128,6 +129,13 @@ public class CalendarDateHolder {
     public void changeFeedback() {
         relativeLayout.setBackgroundColor(context.getResources().getColor(R.color.v2_green));
         textView.setTextColor(context.getResources().getColor(R.color.v2_white));
+    }
+
+    public void setCalendarTime(String time, TextView timeTextview) {
+        if (time != null) {
+            timeTextview.setVisibility(View.VISIBLE);
+            timeTextview.setText(time);
+        }
     }
 
 

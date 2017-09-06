@@ -95,10 +95,10 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
 
     @Override
     public void setUpRecycleView(int dateStartFromWeekDay, int currentFocusMonth, int currentFocusyear, boolean is31stDayMonth) {
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 7));
+        /*recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 7));
         recyclerView.addItemDecoration(new SpacesItemDecoration());
         nonRangeAdapter = new NonRangeAdapter(this, context, dateStartFromWeekDay, currentFocusMonth, currentFocusyear, is31stDayMonth, calendarDateManager);
-        recyclerView.setAdapter(nonRangeAdapter);
+        recyclerView.setAdapter(nonRangeAdapter);*/
     }
 
     @Override
@@ -179,8 +179,9 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
     public void setUpRecycleViewMultipleMode(int skipDays, int currentMonth, int currentYear, boolean is31stDayMonth) {
         Log.d(TAG, "Multiple Selection");
         calendarDateManager.setSelectionMode(2);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 7));
-        recyclerView.addItemDecoration(new SpacesItemDecoration());
+        recyclerView.addItemDecoration(new SpacesItemDecoration(context));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 7);
+        recyclerView.setLayoutManager(gridLayoutManager);
         rangeAdapter = new RangeAdapter(this, context, skipDays, currentMonth, currentYear, is31stDayMonth, calendarDateManager);
         recyclerView.setAdapter(rangeAdapter);
     }
@@ -190,7 +191,7 @@ public class MultiSelectionCalendarView extends RelativeLayout implements Calend
         Log.d(TAG, "Single Selection");
         calendarDateManager.setSelectionMode(1);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 7));
-        recyclerView.addItemDecoration(new SpacesItemDecoration());
+        recyclerView.addItemDecoration(new SpacesItemDecoration(context));
         nonRangeAdapter = new NonRangeAdapter(this, context, skipDays, currentMonth, currentYear, is31stDayMonth, calendarDateManager);
         recyclerView.setAdapter(nonRangeAdapter);
     }

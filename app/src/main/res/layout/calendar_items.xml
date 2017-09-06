@@ -1,21 +1,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/calendar_dates_layout"
-    android:layout_width="70dp"
-    android:layout_height="@dimen/calender_square_size"
-    android:minWidth="70dp"
+    android:layout_width="60sp"
+    android:layout_height="wrap_content"
     android:minHeight="40dp"
-    android:background="@color/v2_white">
+    android:minWidth="60dp">
+
+    <RelativeLayout
+        android:id="@+id/calendar_dates_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/v2_white">
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:alpha="0.5"
+            android:enabled="false"
+            android:gravity="center"
+            android:textColor="@color/v2_grey"
+            android:textSize="@dimen/calendar_header_text_size"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/day"
+        android:visibility="gone"
+        android:id="@+id/time"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.5"
-        android:enabled="false"
+        android:layout_height="10dp"
+        android:layout_below="@+id/calendar_dates_layout"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/corner_round_rectangle_filled_green"
         android:gravity="center"
-        android:textColor="@color/v2_grey"
-        android:textSize="@dimen/calendar_header_text_size"
-        android:textStyle="bold" />
+        android:padding="0.5dp"
+        android:text="04:00"
+        android:textSize="6sp" />
 
 
 </RelativeLayout>
