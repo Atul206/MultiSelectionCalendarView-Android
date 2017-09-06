@@ -6,9 +6,9 @@ package com.roadster.sakhala.multselectioncalendarview.calendarview;
 
 public class Event {
     public long date;
-    public int colorId;
+    public String colorId;
 
-    public Event(long date, int colorId) {
+    public Event(long date, String colorId) {
         this.date = date;
         this.colorId = colorId;
     }
@@ -21,11 +21,11 @@ public class Event {
         this.date = date;
     }
 
-    public int getColorId() {
+    public String getColorId() {
         return colorId;
     }
 
-    public void setColorId(int colorId) {
+    public void setColorId(String colorId) {
         this.colorId = colorId;
     }
 }
