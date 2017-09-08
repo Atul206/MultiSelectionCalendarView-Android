@@ -1,5 +1,0 @@
-/Users/atulsakhala/Documents/MultSelectionCalendarView/app/src/main/java/com/roadster/sakhala/multselectioncalendarview/acitvity/SampleCalendarActivity.java
-/Users/atulsakhala/Documents/MultSelectionCalendarView/app/src/main/java/com/roadster/sakhala/multselectioncalendarview/adapter/NonRangeAdapter.java
-/Users/atulsakhala/Documents/MultSelectionCalendarView/app/src/main/java/com/roadster/sakhala/multselectioncalendarview/adapter/RangeAdapter.java
-/Users/atulsakhala/Documents/MultSelectionCalendarView/app/src/main/java/com/roadster/sakhala/multselectioncalendarview/calendarview/CalendarDateManager.java
-/Users/atulsakhala/Documents/MultSelectionCalendarView/app/src/main/java/com/roadster/sakhala/multselectioncalendarview/calendarview/MultiSelectionCalendarView.java
