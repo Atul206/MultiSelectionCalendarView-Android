@@ -158,6 +158,7 @@ public class RangeAdapter extends RecyclerView.Adapter<RangeAdapter.DateLayoutVi
     }
 
     public void invalidateSelection() {
+        count = 1;
         calendarDateManager.clearCalendarData();
         new Handler().post(new Runnable() {
             @Override

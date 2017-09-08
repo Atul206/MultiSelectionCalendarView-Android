@@ -170,14 +170,14 @@ public class CalendarDateManager {
     }
 
     public Date getMinDate() {
-        if(this.minDate == null){
+        if (this.minDate == null) {
             return null;
         }
         return new Date(this.minDate);
     }
 
     public void setMinDate(int date, int month, int year) {
-        if(date == 0 || month == 0 || year == 0){
+        if (date == 0 || month == 0 || year == 0) {
             this.minDate = null;
         }
         String minDateStr = month + "/" + date + "/" + year;
@@ -190,14 +190,14 @@ public class CalendarDateManager {
     }
 
     public Date getMaxDate() {
-        if(this.maxDate == null){
+        if (this.maxDate == null) {
             return null;
         }
         return new Date(this.maxDate);
     }
 
     public void setMaxDate(int date, int month, int year) {
-        if(date == 0 || month == 0 || year == 0){
+        if (date == 0 || month == 0 || year == 0) {
             this.maxDate = null;
         }
         String minDateStr = month + "/" + date + "/" + year;
@@ -230,7 +230,7 @@ public class CalendarDateManager {
             setFromDate(date);
             setFromMonth(month);
             setFromYear(year);
-            setMinDate(date,month,year);
+            setMinDate(date, month, year);
         } else if (getCalendarDateHolders().size() == 1) {
             if (getCalendarDateHolders().get(key) != null && getCalendarDateHolders().get(key).isSelected()) {
                 removeMultipleSelection();
@@ -241,7 +241,7 @@ public class CalendarDateManager {
                     setToDate(date);
                     setToMonth(month);
                     setToYear(year);
-                    setMaxDate(date,month,year);
+                    setMaxDate(date, month, year);
                     getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
                 } else {
                     removeMultipleSelection();
@@ -258,7 +258,7 @@ public class CalendarDateManager {
                     setToDate(date);
                     setToMonth(month);
                     setToYear(year);
-                    setMaxDate(date,month,year);
+                    setMaxDate(date, month, year);
                     getCalendarDateHolders().put(key, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, context));
                 } else {
                     removeMultipleSelection();
@@ -282,14 +282,15 @@ public class CalendarDateManager {
         setToDate(0);
         setToMonth(0);
         setToYear(0);
-        setMinDate(0,0,0);
-        setMaxDate(0,0,0);
+        setMinDate(0, 0, 0);
+        setMaxDate(0, 0, 0);
 
         Iterator it = getCalendarDateHolders().entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
-            getCalendarDateHolders().get(pair.getKey()).removeSelection();
+            if (getCalendarDateHolders().get(pair.getKey()) != null)
+                getCalendarDateHolders().get(pair.getKey()).removeSelection();
             it.remove(); // avoids a ConcurrentModificationException
         }
         getCalendarDateHolders().clear();
@@ -309,7 +310,7 @@ public class CalendarDateManager {
         String fromKey = getFromDate() + "_" + getFromMonth() + "_" + getFromYear();
         String toKey = getToDate() + "_" + getToMonth() + "_" + getToYear();
 
-        String dateStr = month+"/"+date+"/"+year;
+        String dateStr = month + "/" + date + "/" + year;
         try {
             Date selectedDate = new Date(parseDate(dateStr));
             if (getMinDate() != null && getMaxDate() != null && selectedDate.after(getMinDate()) && selectedDate.before(getMaxDate())) {
@@ -342,7 +343,8 @@ public class CalendarDateManager {
         String key = date + "_" + month + "_" + year;
 
         Event event = getEventsMap().get(key);
-        textView.setTextColor(Color.parseColor(event.getColorId()));
+        if (null != event)
+            textView.setTextColor(Color.parseColor(event.getColorId()));
     }
 
     public void rangeDataSelection(Context activity, boolean selected, TextView textView, RelativeLayout relativeLayout, int date, int month, int year) {
@@ -350,7 +352,7 @@ public class CalendarDateManager {
         String fromKey = getFromDate() + "_" + getFromMonth() + "_" + getFromYear();
         String toKey = getToDate() + "_" + getToMonth() + "_" + getToYear();
 
-        String dateStr = month+"/"+date+"/"+year;
+        String dateStr = month + "/" + date + "/" + year;
         try {
             Date selectedDate = new Date(parseDate(dateStr));
             if (getMinDate() != null && getMaxDate() != null && selectedDate.after(getMinDate()) && selectedDate.before(getMaxDate())) {
@@ -364,7 +366,7 @@ public class CalendarDateManager {
             if (key.equals(toKey)) {
                 getCalendarDateHolders().put(toKey, new CalendarDateHolder(selected, textView, relativeLayout, date, month, year, null, activity));
             }
-        }catch (ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
@@ -393,8 +395,8 @@ public class CalendarDateManager {
         setSingleDate(0);
         setSingleMonth(0);
         setSingleYear(0);
-        setMinDate(0,0,0);
-        setMaxDate(0,0,0);
+        setMinDate(0, 0, 0);
+        setMaxDate(0, 0, 0);
         getCalendarDateHolders().clear();
     }
 
