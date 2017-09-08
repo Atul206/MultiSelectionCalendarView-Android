@@ -1,0 +1,13 @@
+Found 1 issue
+
+app/src/main/java/com/roadster/sakhala/multselectioncalendarview/calendarview/CalendarDateManager.java:293: error: NULL_DEREFERENCE
+  object returned by `getCalendarDateHolders().get(pair.getKey())` could be null and is dereferenced at line 293
+  291.               System.out.println(pair.getKey() + " = " + pair.getValue());
+  292.               if (pair.getKey() != null && getCalendarDateHolders() != null && getCalendarDateHolders().get(pair.getKey()) != null)
+  293. >                 getCalendarDateHolders().get(pair.getKey()).removeSelection();
+  294.               it.remove(); // avoids a ConcurrentModificationException
+  295.           }
+
+Summary of the reports
+
+  NULL_DEREFERENCE: 1
