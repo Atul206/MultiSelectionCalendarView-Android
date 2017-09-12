@@ -33,7 +33,7 @@ Add it in your root build.gradle at the end of repositories:
 <br/>
 Step 2. Add the dependency
 <pre>dependencies {
-        compile 'com.github.Atul206:MultiSelectionCalendarView-Android:1.1.2'
+        compile 'com.github.Atul206:MultiSelectionCalendarView-Android:1.1.3'
 }</pre>
 
 Step 3. Add MultiCalendarView in you layout
@@ -44,7 +44,6 @@ Step 3. Add MultiCalendarView in you layout
             android:id="@+id/calc"
             app:isRangeMode="true"
             app:noOfRange="2"
-            android:layout_below="@+id/from_to_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 ```
