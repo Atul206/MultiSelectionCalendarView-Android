@@ -42,6 +42,7 @@ public class SampleCalendarActivity extends AppCompatActivity implements OnDateC
         //events.add(new Event(event2, R.color.v2_yellow));
         //events.add(new Event(event3, R.color.v2_green));
         calendarView.setEvent(events);
+        findViewById(R.id.clear).setVisibility(View.GONE);
         findViewById(R.id.clear).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
